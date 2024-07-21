@@ -27,7 +27,7 @@ body {
 
 /* card styling for top walks */
 .card img {
-    max-height: 200px;
+    max-height: 100px;
     object-fit: cover;
   }
 

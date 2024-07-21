@@ -1,3 +1,30 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url("/uploads/tips.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: rgb(27, 25, 25); /* Adjust text color for better contrast */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* Adjust transparency */
+  z-index: -1;
+}
+
 /* walking tipps*/
 
 #walking-tips {
@@ -5,7 +32,11 @@
     max-width: 800px;
     margin: 0 auto;
   }
-  
+ 
+  #walking-tips h1 {
+   color: #f9f9f9;
+   margin-bottom: 20px;
+  }
   .tips-container {
     display: flex;
     flex-direction: column;
@@ -13,7 +44,7 @@
   }
   
   .tip {
-    background-color: #f9f9f9;
+    background-color: #ede1e1;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px;
@@ -21,6 +52,7 @@
   
   .tip h2 {
     margin-top: 0;
+    margin-bottom: 10px;
   }
   
   .tip p {
