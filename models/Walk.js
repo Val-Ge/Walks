@@ -1,25 +1,15 @@
+// Your Walk model might be defined something like this
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const walkSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    distance: {
-        type: String,
-        required: true
-    },
-    difficulty: {
-        type: String,
-        required: true
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    image: { type: String, 
-        required: true 
-    }
+const walkSchema = new Schema({
+    title: String,
+    image: String,
+    distance: String,
+    difficulty: String,
+    location: String
 });
 
-module.exports = mongoose.model('Walk', walkSchema);
+const Walk = mongoose.model('Walk', walkSchema);
+
+module.exports = Walk;

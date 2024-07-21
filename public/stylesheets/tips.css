@@ -1,0 +1,28 @@
+/* walking tipps*/
+
+#walking-tips {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .tips-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .tip {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .tip h2 {
+    margin-top: 0;
+  }
+  
+  .tip p {
+    margin: 0;
+  }

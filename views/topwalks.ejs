@@ -1,12 +1,42 @@
-<%- include('layouts/boilerplate', { title: 'About', body: `
+<link rel="stylesheet" href="/stylesheets/partials.css">
+<link rel="stylesheet" href="/stylesheets/topwalks.css">
+
+<div class="wrapper">
+<%- include('./partials/navbar') %>
+<%- include('layouts/boilerplate') %>
+<div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">Top 10 Walks</h2>
-                    <p class="card-text">This page contains the top 10 walks.</p>
+        <% if (walks && walks.length > 0) { %>
+            <% walks.forEach((walk, index) => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="<%= walk.image %>" class="card-img-top" alt="<%= walk.title %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= walk.title %></h5>
+                            <p class="card-text">Distance: <%= walk.distance %></p>
+                            <p class="card-text">Difficulty: <%= walk.difficulty %></p>
+                            <p class="card-text">Location: <%= walk.location %></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <% if ((index + 1) % 3 === 0 && index !== walks.length - 1) { %>
+                    </div><div class="row">
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <p>No walks available.</p>
+        <% } %>
     </div>
-` }) %>
+</div>
+
+<%- include('./partials/footer') %>
+</div>
+
+
+
+
+
+
+
+
+

@@ -28,21 +28,21 @@ const walks = [
       distance: "5 miles",
       difficulty: "Moderate",
       location: "Bedfordshire, UK",
-      image: "https://example.com/images/dunstable_downs.jpg"
+      image: "uploads/dunst_downs.jpg"
     },
     {
       title: "Warden Hill Circular",
       distance: "3.5 miles",
       difficulty: "Easy",
       location: "Bedfordshire, UK",
-      image: "https://example.com/images/warden_hill.jpg"
+      image: "uploads/warden_hill.jpg"
     },
     {
       title: "Bedford River Walk",
       distance: "7 miles",
       difficulty: "Hard",
       location: "Bedfordshire, UK",
-      image: "https://example.com/images/bedford_river.jpg"
+      image: "uploads/bedford_river.jpg"
     },
     
     // Cambridgeshire Walks
@@ -51,21 +51,21 @@ const walks = [
       distance: "4 miles",
       difficulty: "Easy",
       location: "Cambridgeshire, UK",
-      image: "https://example.com/images/grantchester_meadows.jpg"
+      image: "uploads/grantchester_meadows.jpg"
     },
     {
       title: "Wimpole Estate Walk",
       distance: "6 miles",
       difficulty: "Moderate",
       location: "Cambridgeshire, UK",
-      image: "https://example.com/images/wimpole_estate.jpg"
+      image: "uploads/wimpole_estate.jpg"
     },
     {
       title: "Gog Magog Hills Walk",
       distance: "8 miles",
       difficulty: "Hard",
       location: "Cambridgeshire, UK",
-      image: "https://example.com/images/gog_magog_hills.jpg"
+      image: "uploads/gog_magog_hills.jpg"
     },
     
     // Northamptonshire Walks
@@ -74,21 +74,21 @@ const walks = [
       distance: "3 miles",
       difficulty: "Easy",
       location: "Northamptonshire, UK",
-      image: "https://example.com/images/sywell_country_park.jpg"
+      image: "uploads/sywell_country_park.jpg"
     },
     {
       title: "Barnwell Country Park Walk",
       distance: "5 miles",
       difficulty: "Moderate",
       location: "Northamptonshire, UK",
-      image: "https://example.com/images/barnwell_country_park.jpg"
+      image: "uploads/barnwell_country_park.jpg"
     },
     {
       title: "Stanwick Lakes Walk",
       distance: "7.5 miles",
       difficulty: "Hard",
       location: "Northamptonshire, UK",
-      image: "https://example.com/images/stanwick_lakes.jpg"
+      image: "uploads/stanwick_lakes.jpg"
     }
   ];
   

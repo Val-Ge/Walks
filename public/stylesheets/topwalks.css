@@ -1,0 +1,50 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("/uploads/topwalks.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: rgb(27, 25, 25); /* Adjust text color for better contrast */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Adjust transparency */
+    z-index: -1;
+}
+
+/* card styling for top walks */
+.card img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .card {
+    background: #fff; /* White background for cards */
+    border: 1px solid #ddd; /* Light border for better separation */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.card-body {
+    padding: 20px; /* Increase padding for better spacing */
+}
+
+.card-title {
+    font-size: 1.25rem; /* Larger title */
+    margin-bottom: 0.5rem; /* Space below title */
+}
+
+  

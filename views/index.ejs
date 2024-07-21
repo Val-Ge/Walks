@@ -1,34 +1,31 @@
-<%- include('layouts/boilerplate', { title: 'Home', body: `
-    <div class="wrapper">
-        <div class="main-content">
-            <div class="overlay"></div>
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h2 class="card-title">Embrace the Journey - Walking in Nature</h2>
-                                <h4>Discover the Joys of Walking in Nature</h4>
-                                <p class="card-text">Walking in nature isn't just about putting one foot in front of the other; 
-                                    it's about reconnecting with the natural world, finding peace, and rejuvenating your mind and body.
-                                    <br>
-                                    Welcome to our blog, where we explore the myriad benefits of walking in nature and inspire you to step outside and embrace the journey.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Sidebar</h5>
-                                <p class="card-text">This is the sidebar content.</p>
-                            </div>
-                        </div>
-                    </div>
+<%- include('./partials/navbar') %>
+<%- include('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/index.css">
+<link rel="stylesheet" href="/stylesheets/partials.css">
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                   <h2  class="card-title"><strong>Embrace the Journey</strong></h2>
+                    <h4>Discover the Joys of Walking in Nature</h4>
+                    <p class="card-text">Walking in nature isn't just about putting one foot in front of the other; 
+                        it's about reconnecting with the natural world, finding peace, and rejuvenating your mind and body.
+                        <br>
+                        Welcome to our blog, where we explore the myriad benefits of walking in nature and inspire you to step outside and embrace the journey.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-` }) %>
+</div>
+
+
+<%- include('./partials/footer') %>
+
+
 
 
