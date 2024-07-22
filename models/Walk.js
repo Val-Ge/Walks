@@ -1,4 +1,4 @@
-// Your Walk model might be defined something like this
+//Walk model 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
