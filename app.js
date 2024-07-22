@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Walk = require('./models/Walk');
 
+
 const port = 3000;
 
 const app = express();
@@ -22,9 +23,15 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded( { extended: true}))
 
+
+
 app.get('/', (req, res) => {
     res.render('index');
 });
+
+app.get('/walks', (req, res) => {
+    res.render('walks');
+  });
 
 app.get('/topwalks', async (req, res) => {
     try {
