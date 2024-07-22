@@ -1,9 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const session = require('express-sessio');
+// const bodyParser = require('body-parser');
+const session = require('express-session');
 const passport = require('./configs/passport-config');
+const flash = require('connect-flash');
 require('dotenv').config(); // Load environment variables from .env file
+
 const port = 3000;
 const app = express();
 
@@ -38,6 +40,16 @@ app.use(session({
     saveUninitialized: false
 }));
 
+//connect flash setup
+app.use(flash());
+
+//global variables for flash essages
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 //Initialize passport
 app.use(passport.initialize());

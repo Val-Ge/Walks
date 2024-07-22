@@ -7,11 +7,20 @@
         <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title">Register</h5>                  
+                    <h5 class="card-title">Register</h5>  
+                    <!-- Display flash messages -->
+                    <div class="mb-3">
+                        <% if (success_msg) { %>
+                            <div class="alert alert-success"><%= success_msg %></div>
+                        <% } %>
+                        <% if (error_msg) { %>
+                            <div class="alert alert-danger"><%= error_msg %></div>
+                        <% } %>
+                    </div>                
                     <form action="/register" method="POST" class="validated-form" novalidate>
                         <div class="mb-3">
                             <label class="form-label" for="name">Name</label>
-                            <input class="form-control" type="text" id="name" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>" autofocus required>
+                            <input class="form-control" type="text" id="name" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
