@@ -10,20 +10,25 @@
   <link rel="stylesheet" href="/stylesheets/walks.css">
 </head>
 <body>
-<%- include('./partials/navbar') %>
-<%- include('layouts/walksboilerplate') %>
+  <%- include('./partials/navbar') %>
+  <%- include('layouts/walksboilerplate') %>
   <div class="container">
     <div class="content">
       <h1>Walks in the UK</h1>
-      <!-- You can add more content here if needed -->
     </div>
     <div id="map"></div>
   </div>
-
   <%- include('./partials/footer') %>
+
   <!-- Leaflet JavaScript -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
+    // Embed the JSON data directly
+    const walks = <%- walks %>; // Note: This should correctly insert the JSON data as a JavaScript object
+
+    // Debugging line to check the data format
+    console.log('Walks data:', walks);
+
     // Initialize the map
     const map = L.map('map').setView([54.5, -3], 6); // Centered on the UK with a zoom level of 6
 
@@ -32,10 +37,26 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Example marker (adjust coordinates as needed)
-    L.marker([52.136436, -0.460739]).addTo(map)
-      .bindPopup('<b>Bedford</b><br>The place to be!!.')
-      .openPopup();
+    // Loop through the walks array and add markers
+    if (Array.isArray(walks)) {
+      walks.forEach(walk => {
+        if (walk.coordinates && Array.isArray(walk.coordinates) && walk.coordinates.length === 2) {
+          const [lat, lng] = walk.coordinates;
+          const marker = L.marker([lat, lng]).addTo(map);
+          marker.bindPopup(`
+            <b>${walk.title}</b><br>
+            Distance: ${walk.distance}<br>
+            Difficulty: ${walk.difficulty}<br>
+            <img src="${walk.image}" alt="${walk.title}" style="width:100px;height:auto;">
+          `);
+        } else {
+          console.error('Invalid or missing coordinates:', walk.coordinates);
+        }
+      });
+    } else {
+      console.error('Walks is not an array:', walks);
+    }
   </script>
 </body>
 </html>
+

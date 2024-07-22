@@ -7,7 +7,11 @@ const walkSchema = new Schema({
     image: String,
     distance: String,
     difficulty: String,
-    location: String
+    location: String,
+    coordinates: {
+        type: [Number], //Array of numbers: [latitude, longitude]
+        required: true
+    }
 });
 
 const Walk = mongoose.model('Walk', walkSchema);

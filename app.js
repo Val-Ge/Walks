@@ -29,9 +29,15 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/walks', (req, res) => {
-    res.render('walks');
-  });
+app.get('/walks', async (req, res) => {
+    try {
+        const walks = await Walk.find(); // Fetch walks from the database
+        res.render('walks', { walks: JSON.stringify(walks) }); // Pass walks as JSON string to the template
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
 
 app.get('/topwalks', async (req, res) => {
     try {
