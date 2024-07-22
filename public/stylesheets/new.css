@@ -1,0 +1,22 @@
+ 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("/uploads/new.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: rgb(27, 25, 25); /* Adjust text color for better contrast */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+    /* background: rgba(0, 0, 0, 0.4); Adjust transparency */
+    z-index: -1;
+}

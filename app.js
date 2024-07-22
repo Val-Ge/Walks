@@ -1,6 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require('express-sessio');
+const passport = require('./configs/passport-config');
+require('dotenv').config(); // Load environment variables from .env file
 const port = 3000;
 const app = express();
 
@@ -28,8 +31,17 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded( { extended: true}))
 
+//express session setup
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false
+}));
 
 
+//Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/', userRoutes);

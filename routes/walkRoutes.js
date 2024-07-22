@@ -29,6 +29,9 @@ router.get('/topwalks', async (req, res) => {
     }
 });
 
+router.get('/new', (req, res) => {
+    res.render('new');
+})
 
 
 

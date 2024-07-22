@@ -1,6 +1,7 @@
 //User model
-const { required } = require('joi');
+const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -27,6 +28,20 @@ const userSchema = new Schema({
         default: Date.now
     }
 });
+
+// Hash the password before saving
+userSchema.pre('save', async function(next) {
+    if(this.isModified('password') || this.isNew) {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+    }
+    next();
+})
+
+// compare hashed pw with salted pw
+userSchema.methods.comparePassword = async function(candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+};
 
 const User = mongoose.model('User', userSchema);
 
