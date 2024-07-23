@@ -64,9 +64,57 @@
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-primary">Add Walk</button>
                 </div>
-
             </form>          
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('walkForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+      
+      const title = document.getElementById('title').value;
+      const distance = document.getElementById('distance').value;
+      const difficulty = document.getElementById('difficulty').value;
+      const location = document.getElementById('location').value;
+
+      // Fetch coordinates from the server-side API
+      const response = await fetch('/geocode', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ location })
+      });
+
+      const data = await response.json();
+      if (data.coordinates) {
+        const coordinates = data.coordinates;
+
+        // Send the form data along with coordinates to the server
+               // Send the form data along with coordinates to the server
+            const formData = new FormData();
+            formData.append('walk[title]', title);
+            formData.append('walk[distance]', distance);
+            formData.append('walk[difficulty]', difficulty);
+            formData.append('walk[location]', location);
+            formData.append('walk[coordinates]', JSON.stringify(coordinates));
+            formData.append('image', document.getElementById('image').files[0]);
+
+        const saveResponse = await fetch('/new', {
+          method: 'POST',
+          body: formData
+        });
+
+        const saveResult = await saveResponse.json();
+        if (saveResult.success) {
+          alert('Walk added successfully!');
+          window.location.href = '/walks';
+        } else {
+          alert('Failed to add walk.');
+        }
+      } else {
+        alert('Failed to fetch coordinates for the location.');
+      }
+    });
+  </script>
 <%-include('./partials/footer')%>

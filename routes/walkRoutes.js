@@ -1,10 +1,13 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const Walk = require('../models/Walk')
 const multer = require('multer');
 const path = require('path');
 const { check, validationResult } = require('express-validator'); 
+const fetch = require('node-fetch');
+
+const GEOCODE_API_KEY = process.env.OPENCAGE_API_KEY
 
 //set up multer for file uploads
 const storage = multer.diskStorage({
@@ -46,6 +49,23 @@ router.get('/new', (req, res) => {
     res.render('new');
 })
 
+router.post('/geocode', async (req, res) => {
+    const location = req.body.location;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${GEOCODE_API_KEY}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.results && data.results.length > 0) {
+            const coordinates = data.results[0].geometry;
+            res.json({ coordinates: [coordinates.lat, coordinates.lng] });
+        } else {
+            res.status(404).json({ error: 'location not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching coordinates' });
+    }
+});
 
 router.post('/new',
     upload.single('image'),
@@ -70,11 +90,25 @@ router.post('/new',
             const { title, distance, difficulty, location } = req.body.walk;
             const image = req.file ? req.file.filename : '';
 
+            const response = await fetch('/geocode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ location })
+            });
+
+            const data = await response.json();
+            if (!data.coordinates) {
+                throw new Error('Failed to fetch coordinates');
+            }
+
             const newWalk = new Walk({
                 title,
                 distance,
                 difficulty,
                 location,
+                coordinates: data.coordinates,
                 image
             });
 
