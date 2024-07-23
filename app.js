@@ -16,7 +16,8 @@ import userRoutes from './routes/userRoutes.js';
 import walkRoutes from './routes/walkRoutes.js';
 import otherBlogRoutes from './routes/otherBlogRoutes.js';
 
-const port = 3000;
+const port = process.env.PORT || 3000;
+
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/walksdb', {

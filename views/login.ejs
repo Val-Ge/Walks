@@ -10,13 +10,13 @@
                     <h5 class="card-title">Login</h5> 
                      <!-- Display flash messages -->
                         <% if (success_msg) { %>
-                            <div class="alert alert-success"><%= success_msg %></div>
+                            <div class="alert-success"><%= success_msg %></div>
                         <% } %>
                         <% if (error_msg) { %>
-                            <div class="alert alert-danger"><%= error_msg %></div>
+                            <div class="alert-danger"><%= error_msg %></div>
                         <% } %>
                         <% if (error) { %>
-                            <div class="alert alert-danger"><%= error %></div>
+                            <div class="alert-danger"><%= error %></div>
                         <% } %>                 
                     <form action="/login" method="POST" class="validated-form" novalidate>
                             <div class="mb-3">

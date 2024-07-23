@@ -8,15 +8,8 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Register</h5>  
-                    <!-- Display flash messages -->
-                    <div class="mb-3">
-                        <% if (success_msg) { %>
-                            <div class="alert alert-success"><%= success_msg %></div>
-                        <% } %>
-                        <% if (error_msg) { %>
-                            <div class="alert alert-danger"><%= error_msg %></div>
-                        <% } %>
-                    </div>                
+                    <!-- Display flash messages conditionally -->
+                    <%- include('./partials/flash') %>
                     <form action="/register" method="POST" class="validated-form" novalidate>
                         <div class="mb-3">
                             <label class="form-label" for="name">Name</label>
