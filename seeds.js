@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Walk = require('./models/Walk'); // Adjust the path to your model
+import mongoose from 'mongoose';
+import Walk from './models/Walk.js'; // Adjust the path to your model
 
 mongoose.connect('mongodb://localhost:27017/walksdb', {
   useNewUrlParser: true,

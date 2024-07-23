@@ -1,9 +1,10 @@
-// const mongoose = require('mongoose');
-const express = require('express');
-const passport = require('passport');
-// const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/User');
-const router = express.Router();
+import mongoose from 'mongoose';
+import express from 'express';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import User from '../models/User.js';
+import { Router } from 'express';
+const router = Router();
 
 router.get('/register', (req, res) => {
     res.render('register');
@@ -38,7 +39,7 @@ router.post('/register', async(req, res) => {
         //create and save new user
         const newUser = new User({ name, email, password });
         await newUser.save();
-        
+
         req.flash('success_msg', 'You are now registered and can log in');
         res.redirect('/login')
     } catch (error) {
@@ -67,4 +68,4 @@ router.get('/logout', (req, res) => {
     });
 });
 
-module.exports = router; 
+export default router; 

@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
-const express = require('express');
+import mongoose from 'mongoose';
+import express from 'express';
 const router = express.Router();
-const Walk = require('../models/Walk')
-const multer = require('multer');
-const path = require('path');
-const { check, validationResult } = require('express-validator'); 
-const fetch = require('node-fetch');
-
+import Walk from '../models/Walk.js';
+import multer from 'multer';
+import path from 'path';
+import { check, validationResult } from 'express-validator'; 
+import fetch from 'node-fetch';
 const GEOCODE_API_KEY = process.env.OPENCAGE_API_KEY
 
 //set up multer for file uploads
@@ -126,4 +125,4 @@ router.post('/new',
 );
 
 
-module.exports = router;
+export default router; 

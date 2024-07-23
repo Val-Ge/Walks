@@ -1,6 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const router = express.Router();
+import express from 'express';
+import mongoose from 'mongoose';
+import { Router } from 'express';
+const router = Router();
 
 
 router.get('/', (req, res) => {
@@ -12,10 +13,4 @@ router.get('/tips', (req, res) => {
 });
 
 
-
-
-
-
-
-
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
 //Walk model 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const walkSchema = new Schema({
     title: String,
@@ -16,4 +16,4 @@ const walkSchema = new Schema({
 
 const Walk = mongoose.model('Walk', walkSchema);
 
-module.exports = Walk;
+export default Walk;

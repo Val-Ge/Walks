@@ -1,22 +1,22 @@
-const express = require('express')
-const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
-const session = require('express-session');
-const passport = require('./configs/passport-config');
-const flash = require('connect-flash');
-require('dotenv').config(); // Load environment variables from .env file
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import session from 'express-session';
+import passport from './configs/passport-config';
+import flash from 'connect-flash';
+import('dotenv').config(); // Load environment variables from .env file
 
 const port = 3000;
 const app = express();
 
 //import models
-const Walk = require('./models/Walk');
-const User = require('./models/User');
+import Walk from './models/Walk.js';
+import User from './models/User.js';
 
 //import routes
-const userRoutes = require('./routes/userRoutes');
-const walkRoutes = require('./routes/walkRoutes');
-const otherBlogRoutes = require('./routes/otherBlogRoutes');
+import userRoutes from './routes/userRoutes.js';
+import walkRoutes from './routes/walkRoutes.js';
+import otherBlogRoutes from './routes/otherBlogRoutes.js';
 
 mongoose.connect('mongodb://localhost:27017/walksdb', {
     useNewUrlParser: true,
