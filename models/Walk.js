@@ -10,7 +10,7 @@ const walkSchema = new Schema({
     location: String,
     coordinates: {
         type: [Number], //Array of numbers: [latitude, longitude]
-        required: true
+        required: false
     }
 });
 

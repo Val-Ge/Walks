@@ -9,6 +9,15 @@
     <div class="row">
         <h1 class="text-center mb-4">Add Your Walk</h1>
         <div class="col-md-6 offset-md-3">
+            <!-- Display flash messages -->
+            <div class="mb-3">
+                <% if (success_msg) { %>
+                    <div class="alert alert-success"><%= success_msg %></div>
+                <% } %>
+                <% if (error_msg) { %>
+                    <div class="alert alert-danger"><%= error_msg %></div>
+                <% } %>
+            </div>
             <form id="postForm" action="/new" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
@@ -53,7 +62,7 @@
                     </div>
                 </div>
                 <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-primary">Add Post</button>
+                    <button type="submit" class="btn btn-primary">Add Walk</button>
                 </div>
 
             </form>          
