@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables
+
 import mongoose from 'mongoose';
 import express from 'express';
 const router = express.Router();
@@ -53,7 +56,15 @@ router.post('/geocode', async (req, res) => {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${GEOCODE_API_KEY}`;
 
     try {
+        console.log(`Fetching URL: ${url}`); // Log the URL to ensure it's correct
+
         const response = await fetch(url);
+        if(!response.ok) {
+            // Log status code and status text
+            console.error('API response error:', response.status, response.statusText);
+            return res.status(response.status).json({ error: 'Failed to fetch coordinates' });
+        }
+
         const data = await response.json();
         if (data.results && data.results.length > 0) {
             const coordinates = data.results[0].geometry;
@@ -62,6 +73,9 @@ router.post('/geocode', async (req, res) => {
             res.status(404).json({ error: 'location not found' });
         }
     } catch (error) {
+        // Log the error message and stack trace
+        console.error('Error fetching coordinates:', error.message);
+        console.error(error.stack);
         res.status(500).json({ error: 'Error fetching coordinates' });
     }
 });
@@ -89,7 +103,7 @@ router.post('/new',
             const { title, distance, difficulty, location } = req.body.walk;
             const image = req.file ? req.file.filename : '';
 
-            const response = await fetch('/geocode', {
+            const response = await fetch('http://localhost:3000/geocode', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
