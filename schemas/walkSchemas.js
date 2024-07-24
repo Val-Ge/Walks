@@ -10,14 +10,5 @@ export const walkSchema = Joi.object({
         lat: Joi.number().optional(),
         lon: Joi.number().optional()
     }).optional(),
-    // image: Joi.object({
-    //     fieldname: Joi.string().required(),
-    //     originalname: Joi.string().required(),
-    //     encoding: Joi.string().required(),
-    //     mimetype: Joi.string().required(),
-    //     destination: Joi.string().required(),
-    //     filename: Joi.string().required(),
-    //     path: Joi.string().required(),
-    //     size: Joi.number().required()
-    // }).optional()
+    image: Joi.string().allow(null)  // Allowing string or null for the image field
 });

@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Please try again.');
+            // alert('An error occurred. Please try again.'); this line causes the popup
+            document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+            document.getElementById('error-message').textContent = ''; // Clear the message
         }
     });
 });

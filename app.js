@@ -32,8 +32,8 @@ app.set('view engine', 'ejs');
 
 //middleware
 app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded( { extended: true}))
+app.use(express.json()); //Parses incoming JSON requests.
+app.use(express.urlencoded( { extended: true})) // Parses incoming URL-encoded requests (from forms).
 
 //express session setup
 app.use(session({
@@ -45,7 +45,7 @@ app.use(session({
 //connect flash setup
 app.use(flash());
 
-//global variables for flash essages
+//Flash middleware: Makes flash messages available to all views by attaching them to res.locals
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
     next();
 });
 
-//Initialize passport
+//Passport: Initializes Passport for handling authentication and manages session-based authentication.
 app.use(passport.initialize());
 app.use(passport.session());
 

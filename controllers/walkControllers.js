@@ -4,16 +4,17 @@ import Walk from '../models/Walk.js';
 // Create a new walk
 export const createWalk = async (req, res) => {
     const { title, distance, difficulty, location, coordinates: coordsString } = req.body;
-    const image = req.file ? {
-        fieldname: req.file.fieldname,
-        originalname: req.file.originalname,
-        encoding: req.file.encoding,
-        mimetype: req.file.mimetype,
-        destination: req.file.destination,
-        filename: req.file.filename,
-        path: req.file.path,
-        size: req.file.size
-    } : null;
+    const imagePath = req.file ? req.file.path : null;
+    // const image = req.file ? {
+    //     fieldname: req.file.fieldname,
+    //     originalname: req.file.originalname,
+    //     encoding: req.file.encoding,
+    //     mimetype: req.file.mimetype,
+    //     destination: req.file.destination,
+    //     filename: req.file.filename,
+    //     path: req.file.path,
+    //     size: req.file.size
+    // } : null;
 
     let coordinates = null;
     if (coordsString) {
@@ -35,7 +36,7 @@ export const createWalk = async (req, res) => {
         }
     }
 
-    const { error } = walkSchema.validate({ title, distance, difficulty, location, coordinates, image });
+    const { error } = walkSchema.validate({ title, distance, difficulty, location, coordinates, image: imagePath });
     if (error) {
         console.error('Validation error:', JSON.stringify(error.details, null, 2));
         req.flash('error_msg', error.details[0].message);
@@ -49,16 +50,17 @@ export const createWalk = async (req, res) => {
             difficulty,
             location,
             coordinates,
-              image: req.file ? {
-                fieldname: req.file.fieldname,
-                originalname: req.file.originalname,
-                encoding: req.file.encoding,
-                mimetype: req.file.mimetype,
-                destination: req.file.destination,
-                filename: req.file.filename,
-                path: req.file.path,
-                size: req.file.size
-            } : null
+            image: imagePath
+            //   image: req.file ? {
+            //     fieldname: req.file.fieldname,
+            //     originalname: req.file.originalname,
+            //     encoding: req.file.encoding,
+            //     mimetype: req.file.mimetype,
+            //     destination: req.file.destination,
+            //     filename: req.file.filename,
+            //     path: req.file.path,
+            //     size: req.file.size
+            // } : null
         });
 
         await newWalk.save();
