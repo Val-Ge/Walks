@@ -1,120 +1,79 @@
-<link rel="stylesheet" href="/stylesheets/partials.css">
-<link rel="stylesheet" href="/stylesheets/new.css">
-
-<%- include('./partials/navbar') %>
-<%- include('./layouts/boilerplate') %>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Link to stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/partials.css">
+    <link rel="stylesheet" href="/stylesheets/new.css">
+</head>
 <body>
-<div class="container mt-4">
-    <div class="row">
-        <h1 class="text-center mb-4">Add Your Walk</h1>
-        <div class="col-md-6 offset-md-3">
-            <!-- Display flash messages -->
-            <div class="mb-3">
-                <% if (success_msg) { %>
-                    <div class="alert-success"><%= success_msg %></div>
-                <% } %>
-                <% if (error_msg) { %>
-                    <div class="alert-danger"><%= error_msg %></div>
-                <% } %>
-            </div>
-            <form id="postForm" action="/new" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+    <%- include('./partials/navbar') %>
+    <%- include('./layouts/boilerplate') %>
+
+    <div class="container mt-4">
+        <div class="row">
+            <h1 class="text-center mb-4">Add Your Walk</h1>
+            <div class="col-md-6 offset-md-3">
+                <!-- Display flash messages -->
                 <div class="mb-3">
-                    <label class="form-label" for="title">Title</label>
-                    <input class="form-control" type="text" id="title" name="walk[title]" required>
-                    <div class="invalid-feedback">
-                        Please provide a title.
-                    </div>
+                    <% if (success_msg) { %>
+                        <div class="alert-success"><%= success_msg %></div>
+                    <% } %>
+                    <% if (error_msg) { %>
+                        <div class="alert-danger"><%= error_msg %></div>
+                    <% } %>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="distance">Distance</label>
-                    <input class="form-control" type="text" id="content" name="walk[distance]" required></textarea>
-                    <div class="invalid-feedback">
-                        Please provide content
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="difficulty">Difficulty</label>
-                    <input class="form-control" type="text" id="content" name="walk[difficulty]" required></textarea>
-                    <div class="invalid-feedback">
-                        Please provide content
-                    </div>
-                </div>
-               
-                <div class="mb-3">
-                    <label class="form-label" for="location">Location</label>
-                    <input class="form-control" type="text" id="location" name="walk[location]" required>
-                    <div class="invalid-feedback">
-                        Please provide a location.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="image">Image</label>
-                    <div class="form-file">
-                        <input type="file" class="form-file-input" id="image" name="image" required>
-                        <label class="form-file-label" for="image">
-                            <span class="form-file-text">Choose image...</span>
-                            <span class="form-file-button">Browse</span>
-                        </label>
+                <form id="walkForm" action="/new" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <input class="form-control" type="text" id="title" name="title" required>
                         <div class="invalid-feedback">
-                            Please choose an image.
-                      </div>
+                            Please provide a title.
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-primary">Add Walk</button>
-                </div>
-            </form>          
+                    <div class="mb-3">
+                        <label class="form-label" for="distance">Distance</label>
+                        <input class="form-control" type="text" id="distance" name="distance" required>
+                        <div class="invalid-feedback">
+                            Please provide content
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="difficulty">Difficulty</label>
+                        <input class="form-control" type="text" id="difficulty" name="difficulty" required>
+                        <div class="invalid-feedback">
+                            Please provide content
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="location">Location</label>
+                        <input class="form-control" type="text" id="location" name="location" required>
+                        <div class="invalid-feedback">
+                            Please provide a location.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="image">Image</label>
+                        <div class="form-file">
+                            <input type="file" class="form-file-input" id="image" name="image" required>
+                            <label class="form-file-label" for="image">
+                                <span class="form-file-text">Choose image...</span>
+                                <span class="form-file-button">Browse</span>
+                            </label>
+                            <div class="invalid-feedback">
+                                Please choose an image.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-primary">Add Walk</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    document.getElementById('walkForm').addEventListener('submit', async function(event) {
-      event.preventDefault(); // Prevent the form from submitting normally
-      
-      const title = document.getElementById('title').value;
-      const distance = document.getElementById('distance').value;
-      const difficulty = document.getElementById('difficulty').value;
-      const location = document.getElementById('location').value;
-
-      // Fetch coordinates from the server-side API
-      const response = await fetch('/geocode', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ location })
-      });
-
-      const data = await response.json();
-      if (data.coordinates) {
-        const coordinates = data.coordinates;
-
-        // Send the form data along with coordinates to the server
-               // Send the form data along with coordinates to the server
-            const formData = new FormData();
-            formData.append('walk[title]', title);
-            formData.append('walk[distance]', distance);
-            formData.append('walk[difficulty]', difficulty);
-            formData.append('walk[location]', location);
-            formData.append('walk[coordinates]', JSON.stringify(coordinates));
-            formData.append('image', document.getElementById('image').files[0]);
-
-        const saveResponse = await fetch('/new', {
-          method: 'POST',
-          body: formData
-        });
-
-        const saveResult = await saveResponse.json();
-        if (saveResult.success) {
-          alert('Walk added successfully!');
-          window.location.href = '/walks';
-        } else {
-          alert('Failed to add walk.');
-        }
-      } else {
-        alert('Failed to fetch coordinates for the location.');
-      }
-    });
-  </script>
-<%-include('./partials/footer')%>
+<!-- Link to the external JavaScript file -->
+<script src="/js/formHandler.js"></script>
+    
+    <%- include('./partials/footer') %>
+</body>
+</html>
