@@ -6,3 +6,13 @@ export function authMiddleware(req, res, next) {
 
     next();
 }
+ 
+
+export function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated && req.isAuthenticated()) { // If using Passport.js
+        return next();
+    }
+    
+    // Redirect to login page if not authenticated
+    res.redirect('/login');
+}

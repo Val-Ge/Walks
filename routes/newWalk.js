@@ -6,6 +6,7 @@ import Walk from '../models/Walk.js'; // Adjust the path as needed
 import path from 'path';
 import axios from 'axios';
 import { walkSchema } from '../schemas/walkSchemas.js'; // Import your Joi schema
+import { ensureAuthenticated } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 const OPEN_CAGE_API_KEY = process.env.OPENCAGE_API_KEY
@@ -25,8 +26,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Render the form page
-router.get('/new', (req, res) => {
-  res.render('new'); // Ensure this corresponds to the correct EJS template
+router.get('/new', ensureAuthenticated, (req, res) => {
+  res.render('new'); 
 });
 
 // Handle form submission
