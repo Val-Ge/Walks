@@ -8,6 +8,8 @@ import flash from 'connect-flash';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import './configs/passport-config.js';
+import newWalkRouter from './routes/newWalk.js';
+
 
 //import routes and models
 import Walk from './models/Walk.js';
@@ -61,6 +63,9 @@ app.use(passport.session());
 app.use('/', userRoutes);
 app.use('/', walkRoutes);
 app.use('/', otherBlogRoutes);
+app.use('/', newWalkRouter);
+
+
 
 app.listen(port, () => {
     console.log(`server is listening on port http://localhost:${port}`);

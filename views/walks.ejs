@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="/stylesheets/partials.css">
   <link rel="stylesheet" href="/stylesheets/walks.css">
 </head>
+
 <body>
   <%- include('./partials/navbar') %>
   <%- include('layouts/walksboilerplate') %>
@@ -23,7 +25,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Embed the JSON data directly
-    const walks = <%- walks %>; // Note: This should correctly insert the JSON data as a JavaScript object
+    const walks = <%- JSON.stringify(walks) %>;
 
     // Debugging line to check the data format
     console.log('Walks data:', walks);
@@ -39,22 +41,32 @@
     // Loop through the walks array and add markers
     if (Array.isArray(walks)) {
       walks.forEach(walk => {
-        if (walk.coordinates && Array.isArray(walk.coordinates) && walk.coordinates.length === 2) {
-          const [lat, lng] = walk.coordinates;
-          const marker = L.marker([lat, lng]).addTo(map);
-          marker.bindPopup(`
-            <b>${walk.title}</b><br>
-            Distance: ${walk.distance}<br>
-            Difficulty: ${walk.difficulty}<br>
-            <img src="${walk.image}" alt="${walk.title}" style="width:100px;height:auto;">
-          `);
+        let lat, lng;
+
+        // Handle both coordinate formats
+        if (Array.isArray(walk.coordinates) && walk.coordinates.length === 2) {
+          [lat, lng] = walk.coordinates;
+        } else if (walk.coordinates && typeof walk.coordinates.lat === 'number' && typeof walk.coordinates.lon === 'number') {
+          lat = walk.coordinates.lat;
+          lng = walk.coordinates.lon;
         } else {
           console.error('Invalid or missing coordinates:', walk.coordinates);
+          return; // Skip this walk if coordinates are invalid
         }
+
+        // Add marker to the map
+        const marker = L.marker([lat, lng]).addTo(map);
+        marker.bindPopup(`
+          <b>${walk.title}</b><br>
+          Distance: ${walk.distance}<br>
+          Difficulty: ${walk.difficulty}<br>
+          <img src="/${walk.image}" alt="${walk.title}" style="width:100px;height:auto;">
+        `);
       });
     } else {
       console.error('Walks is not an array:', walks);
     }
   </script>
 </body>
+</html>
 

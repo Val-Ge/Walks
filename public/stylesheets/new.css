@@ -20,3 +20,21 @@ body {
     /* background: rgba(0, 0, 0, 0.4); Adjust transparency */
     z-index: -1;
 }
+
+.distance-unit-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .distance-unit-wrapper .form-control {
+    margin-right: 10px; /* Adjust spacing between fields as needed */
+  }
+  
+  .distance-unit-wrapper input[type="number"] {
+    flex: 1; /* Allows the number input to take available space */
+    max-width: 150px; /* Adjust width as needed */
+  }
+  
+  .distance-unit-wrapper select {
+    max-width: 100px; /* Adjust width as needed */
+  }

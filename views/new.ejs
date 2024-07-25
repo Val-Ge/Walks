@@ -1,6 +1,10 @@
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <!-- Link to stylesheets -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Walk</title>
     <link rel="stylesheet" href="/stylesheets/partials.css">
     <link rel="stylesheet" href="/stylesheets/new.css">
 </head>
@@ -29,20 +33,37 @@
                             Please provide a title.
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label" for="distance">Distance</label>
                         <input class="form-control" type="text" id="distance" name="distance" required>
                         <div class="invalid-feedback">
-                            Please provide content
+                            Please provide distance.
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="difficulty">Difficulty</label>
-                        <input class="form-control" type="text" id="difficulty" name="difficulty" required>
-                        <div class="invalid-feedback">
-                            Please provide content
+                    </div> -->
+                    <div class="form-group">
+                        <label for="distance">Distance</label>
+                        <div class="distance-unit-wrapper">
+                          <input type="number" id="distance" name="distance" class="form-control" step="1" required>
+                          <select id="unit" name="unit" class="form-control" required>
+                            <option value="">Select unit</option>
+                            <option value="km">Kilometers</option>
+                            <option value="miles">Miles</option>
+                          </select>
                         </div>
-                    </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label for="difficulty">Difficulty</label>
+                        <select id="difficulty" name="difficulty" class="form-control" required>
+                          <option value="">Select difficulty</option>
+                          <option value="very easy">Very Easy</option>
+                          <option value="easy">Easy</option>
+                          <option value="normal">Normal</option>
+                          <option value="hard">Hard</option>
+                          <option value="very hard">Very Hard</option>
+                        </select>
+                      </div>
+                   
                     <div class="mb-3">
                         <label class="form-label" for="location">Location</label>
                         <input class="form-control" type="text" id="location" name="location" required>
@@ -50,6 +71,7 @@
                             Please provide a location.
                         </div>
                     </div>
+               
                     <div class="mb-3">
                         <label class="form-label" for="image">Image</label>
                         <div class="form-file">
@@ -71,9 +93,6 @@
         </div>
     </div>
     
-<!-- Link to the external JavaScript file -->
-<script src="/js/formHandler.js"></script>
-    
     <%- include('./partials/footer') %>
 </body>
-
+</html>
