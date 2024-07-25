@@ -26,9 +26,14 @@
           </ul>
       </div>
       <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/register">Register</a>
-            <a class="nav-link" href="/logout">Logout</a>
-    </div>
+        <% if (!isLoggedIn && !isRegistered) { %>
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Register</a>
+        <% } else if (isRegistered && !isLoggedIn) { %>
+          <a class="nav-link" href="/login">Login</a>
+        <% } else if (isLoggedIn) { %>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+      </div>
   </div>
 </nav>

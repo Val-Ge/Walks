@@ -19,8 +19,9 @@ import walkRoutes from './routes/walkRoutes.js';
 import otherBlogRoutes from './routes/otherBlogRoutes.js';
 
 const port = process.env.PORT || 3000;
-
+import { authMiddleware } from './middleware/authMiddleware.js'; 
 const app = express();
+
 
 mongoose.connect('mongodb://localhost:27017/walksdb', {
     useNewUrlParser: true,
@@ -58,6 +59,9 @@ app.use((req, res, next) => {
 //Passport: Initializes Passport for handling authentication and manages session-based authentication.
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Use the authentication middleware
+app.use(authMiddleware);
 
 // Routes
 app.use('/', userRoutes);
