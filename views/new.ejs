@@ -77,7 +77,7 @@
                         <div class="form-file">
                             <input type="file" class="form-file-input" id="image" name="image" required>
                             <label class="form-file-label" for="image">
-                                <span class="form-file-text">Choose image...</span>
+                                <span class="form-file-text" id="file-name">Choose image...</span>
                                 <span class="form-file-button">Browse</span>
                             </label>
                             <div class="invalid-feedback">
@@ -94,5 +94,8 @@
     </div>
     
     <%- include('./partials/footer') %>
+
+    <!-- Include the external JavaScript file -->
+    <script src="/js/formHandler.js"></script>
 </body>
 </html>
