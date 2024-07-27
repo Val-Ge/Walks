@@ -1,6 +1,8 @@
+// import environment variables
 import dotenv from 'dotenv';
-dotenv.config(); // Call the config method to load environment variables
+dotenv.config(); //load env variables from .env file
 
+//import modules
 import express from 'express';
 import mongoose from 'mongoose';
 import session from 'express-session';
@@ -8,21 +10,27 @@ import flash from 'connect-flash';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import './configs/passport-config.js';
+
+import { authMiddleware } from './middleware/authMiddleware.js';
+
+// import configurations
+import './configs/passport-config.js'; // Passport configuration
+
+//import routes 
 import newWalkRouter from './routes/newWalk.js';
-
-
-//import routes and models
-import Walk from './models/Walk.js';
-import User from './models/User.js';
 import userRoutes from './routes/userRoutes.js';
 import walkRoutes from './routes/walkRoutes.js';
 import otherBlogRoutes from './routes/otherBlogRoutes.js';
 
-const port = process.env.PORT || 3000;
-import { authMiddleware } from './middleware/authMiddleware.js'; 
+// import models
+import Walk from './models/Walk.js';
+import User from './models/User.js';
+
+//initialize express app
 const app = express();
-
-
+const port = process.env.PORT || 3000;
+ 
+// connect to mongo db
 mongoose.connect('mongodb://localhost:27017/walksdb', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -30,11 +38,11 @@ mongoose.connect('mongodb://localhost:27017/walksdb', {
 .then(()=> console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-
+// set ejs as the templating engine
 app.set('view engine', 'ejs');
 
-//middleware
-app.use(express.static('public'));
+//middleware setup
+app.use(express.static('public')); // serve static files from 'public directory
 app.use(express.json()); //Parses incoming JSON requests.
 app.use(express.urlencoded( { extended: true})) // Parses incoming URL-encoded requests (from forms).
 
@@ -68,8 +76,6 @@ app.use('/', userRoutes);
 app.use('/', walkRoutes);
 app.use('/', otherBlogRoutes);
 app.use('/', newWalkRouter);
-
-
 
 app.listen(port, () => {
     console.log(`server is listening on port http://localhost:${port}`);
